@@ -1,15 +1,29 @@
 import { GraphQLServer } from 'graphql-yoga';
 
 const typeDefs = `
-    type Query {
-      helloWorld: String!
-    }
+  type Query {
+    users: [User!]!
+  }
+
+  type User {
+    id: ID!
+    name: String!
+  }
 `;
 
 const resolvers = {
   Query: {
-    helloWorld() {
-      return 'World!';
+    users() {
+      return [
+        {
+          id: '1',
+          name: 'Marc'
+        },
+        {
+          id: '2',
+          name: 'John'
+        }
+      ];
     }
   }
 };

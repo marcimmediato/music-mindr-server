@@ -1,4 +1,27 @@
 type User {
   id: ID! @unique
+  username: String!
+  email: String! @unique
+  password: String!
+}
+
+type Artist {
+  id: ID! @unique
   name: String!
+  albums: [Album!]!
+  songs: [Song!]!
+}
+
+type Album {
+  id: ID! @unique
+  name: String!
+  artist: Artist!
+  songs: [Song!]!
+}
+
+type Song {
+  id: ID! @unique
+  name: String!
+  artist: Artist!
+  album: Album!
 }

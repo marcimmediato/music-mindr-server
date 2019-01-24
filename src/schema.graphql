@@ -1,0 +1,31 @@
+type Query {
+  users(query: String): [User!]!
+}
+
+type User {
+  id: ID!
+  username: String!
+  email: String!
+  password: String!
+}
+
+type Artist {
+  id: ID!
+  name: String!
+  albums: [Album!]!
+  songs: [Song!]!
+}
+
+type Album {
+  id: ID!
+  name: String!
+  artist: Artist!
+  songs: [Song!]!
+}
+
+type Song {
+  id: ID!
+  name: String!
+  artist: Artist!
+  album: Album!
+}

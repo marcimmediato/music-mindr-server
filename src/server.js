@@ -1,9 +1,12 @@
-import { GraphQLServer } from 'graphql-yoga';
+import { ApolloServer, makeExecutableSchema } from 'apollo-server';
+import typeDefs from './schema.graphql';
 import resolvers from './resolvers/index';
 
-const server = new GraphQLServer({
-  typeDefs: './src/schema.graphql',
+const schema = makeExecutableSchema({
+  typeDefs,
   resolvers
 });
+
+const server = new ApolloServer({ schema });
 
 export { server as default };

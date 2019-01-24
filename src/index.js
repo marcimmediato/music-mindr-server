@@ -1,6 +1,6 @@
 import '@babel/polyfill/noConflict';
 import server from './server';
 
-server.start(() => {
-  console.log('The music-mindr server is up!');
+server.listen().then(({ url }) => {
+  console.log(`🚀 Music Mindr server ready at ${url}`);
 });

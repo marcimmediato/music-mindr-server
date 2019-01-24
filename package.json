@@ -6,12 +6,16 @@
   "author": "Marc Immediato <marc.immediato@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/index.js --exec babel-node"
+    "dev": "nodemon src/index.js --exec babel-node",
+    "get-schema": "graphql get-schema -p prisma"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "graphql-yoga": "^1.17.0"
+    "graphql-cli": "^3.0.6",
+    "graphql-yoga": "^1.17.0",
+    "prisma-binding": "^2.2.14"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

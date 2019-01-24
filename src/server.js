@@ -1,35 +1,8 @@
 import { GraphQLServer } from 'graphql-yoga';
-
-const typeDefs = `
-  type Query {
-    users: [User!]!
-  }
-
-  type User {
-    id: ID!
-    name: String!
-  }
-`;
-
-const resolvers = {
-  Query: {
-    users() {
-      return [
-        {
-          id: '1',
-          name: 'Marc'
-        },
-        {
-          id: '2',
-          name: 'John'
-        }
-      ];
-    }
-  }
-};
+import resolvers from './resolvers/index';
 
 const server = new GraphQLServer({
-  typeDefs,
+  typeDefs: './src/schema.graphql',
   resolvers
 });
 

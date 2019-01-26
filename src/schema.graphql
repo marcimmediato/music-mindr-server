@@ -1,8 +1,5 @@
-import { gql } from 'apollo-server';
-
-const typeDefs = gql`
 type Query {
-  users(query: String): [User!]!
+  artist(id: String): String
 }
 
 type User {
@@ -32,6 +29,3 @@ type Song {
   artist: Artist!
   album: Album!
 }
-`;
-
-export { typeDefs as default };

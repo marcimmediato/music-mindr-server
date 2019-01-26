@@ -1,15 +1,8 @@
 const Query = {
-  users() {
-    return [
-      {
-        id: '1',
-        name: 'Marc'
-      },
-      {
-        id: '2',
-        name: 'John'
-      }
-    ];
+  artist: async (parent, { id }, { dataSources }, info) => {
+    const artist = await dataSources.musicBrainzAPI.getArtist(id);
+    console.log(JSON.stringify(artist));
+    return 'worked';
   }
 };
 

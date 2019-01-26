@@ -18,6 +18,21 @@ const Query = {
       mbID: artist.id,
       spotifyID
     };
+  },
+  artists: async (parent, { query }, { dataSources }, info) => {
+    const results = await dataSources.musicBrainzAPI.searchArtists(query);
+
+    if (results.count === 0) {
+      throw new Error('No results found.');
+    }
+
+    return results.artists.map(({ id, name, disambiguation }) => {
+      return {
+        id,
+        name,
+        description: disambiguation
+      };
+    });
   }
 };
 

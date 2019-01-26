@@ -10,4 +10,10 @@ export default class MusicBrainzAPI extends RESTDataSource {
   async getArtist(id) {
     return this.get(`artist/${id}${this.formatJSON}&inc=url-rels`);
   }
+
+  async searchArtists(searchTerm) {
+    return this.get(
+      `artist/${this.formatJSON}&limit=20&query=artist:${searchTerm}`
+    );
+  }
 }

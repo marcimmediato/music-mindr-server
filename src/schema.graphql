@@ -1,5 +1,5 @@
 type Query {
-  artist(id: String): String
+  artist(id: String): Artist!
 }
 
 type User {
@@ -12,8 +12,10 @@ type User {
 type Artist {
   id: ID!
   name: String!
-  albums: [Album!]!
-  songs: [Song!]!
+  mbID: String!
+  spotifyID: String
+  albums: [Album!]
+  songs: [Song!]
 }
 
 type Album {

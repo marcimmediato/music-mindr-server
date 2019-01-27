@@ -1,7 +1,9 @@
 import Query from './Query';
+import Album from './Album';
 
 const resolvers = {
-  Query
+  Query,
+  Album
 };
 
 export { resolvers as default };

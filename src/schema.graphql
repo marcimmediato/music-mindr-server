@@ -31,7 +31,7 @@ type Album {
   id: ID!
   name: String!
   artist: Artist!
-  songs: [AlbumSong!]!
+  #songs: [AlbumSong!]!
 }
 
 type AlbumResult {

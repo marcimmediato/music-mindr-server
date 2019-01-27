@@ -8,20 +8,75 @@ export default class MusicBrainzAPI extends RESTDataSource {
   }
 
   async getArtist(id) {
-    return this.get(`artist/${id}${this.formatJSON}&inc=url-rels`);
+    const artist = await this.get(
+      `artist/${id}${this.formatJSON}&inc=url-rels`
+    );
+    let spotifyID = null;
+
+    if (artist.relations) {
+      spotifyID = artist.relations
+        .filter(artist => artist.type === 'streaming music')
+        .find(stream => stream.url.resource.includes('spotify'))
+        .url.resource.split('/')
+        .pop();
+    }
+
+    return {
+      id: artist.id,
+      name: artist.name,
+      mbID: artist.id,
+      spotifyID
+    };
   }
 
   async searchArtists(searchTerm) {
-    return this.get(
+    const results = await this.get(
       `artist/${this.formatJSON}&limit=20&query=artist:${searchTerm}`
     );
+
+    if (results.count === 0) {
+      throw new Error('No results found.');
+    }
+
+    return results.artists.map(({ id, name, disambiguation }) => {
+      return {
+        id,
+        name,
+        description: disambiguation
+      };
+    });
   }
 
   async getAlbum(id) {
-    return this.get(`release/${id}${this.formatJSON}&inc=recordings+artists`);
+    const album = await this.get(
+      `release/${id}${this.formatJSON}&inc=recordings+artists`
+    );
+    const artist = album['artist-credit'][0].artist.id;
+
+    // const songs = album.media[0].tracks.map(track => {
+    //   return {
+    //     id: track.id,
+    //     name: track.title,
+    //     trackNum: track.number
+    //   };
+    // });
+
+    return {
+      id: album.id,
+      name: album.title,
+      artist
+    };
   }
 
   async getAlbums(id) {
-    return this.get(`release/${this.formatJSON}&artist=${id}`);
+    const albums = await this.get(`release/${this.formatJSON}&artist=${id}`);
+    return albums.releases.map(album => {
+      return {
+        id: album.id,
+        name: album.title,
+        year: album.date.split('-')[0],
+        country: album.country
+      };
+    });
   }
 }

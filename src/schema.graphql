@@ -1,6 +1,8 @@
 type Query {
   artist(id: String): Artist!
   artists(query: String!): [ArtistResult!]!
+  album(id: String!): Album!
+  albums(query: String!): [AlbumResult!]!
 }
 
 type User {
@@ -29,7 +31,20 @@ type Album {
   id: ID!
   name: String!
   artist: Artist!
-  songs: [Song!]!
+  songs: [AlbumSong!]!
+}
+
+type AlbumResult {
+  id: ID!
+  name: String!
+  year: String
+  country: String
+}
+
+type AlbumSong {
+  id: ID!
+  name: String!
+  trackNum: Int!
 }
 
 type Song {

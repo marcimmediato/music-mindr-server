@@ -33,6 +33,41 @@ const Query = {
         description: disambiguation
       };
     });
+  },
+  album: async (parent, { id }, { dataSources }, info) => {
+    const album = await dataSources.musicBrainzAPI.getAlbum(id);
+    const artist = await dataSources.musicBrainzAPI.getArtist(
+      album['artist-credit'][0].artist.id
+    );
+    const songs = album.media[0].tracks.map(track => {
+      return {
+        id: track.id,
+        name: track.title,
+        trackNum: track.number
+      };
+    });
+
+    return {
+      id: album.id,
+      name: album.title,
+      artist: {
+        id: artist.id,
+        name: artist.name,
+        mbID: artist.id
+      },
+      songs
+    };
+  },
+  albums: async (parent, { query }, { dataSources }, info) => {
+    const albums = await dataSources.musicBrainzAPI.getAlbums(query);
+    return albums.releases.map(album => {
+      return {
+        id: album.id,
+        name: album.title,
+        year: album.date.split('-')[0],
+        country: album.country
+      };
+    });
   }
 };
 

@@ -5,20 +5,21 @@ type Query {
   albums(query: String!): [AlbumResult!]!
 }
 
-type User {
-  id: ID!
-  username: String!
-  email: String!
-  password: String!
-}
+# type User {
+#   id: ID!
+#   username: String!
+#   email: String!
+#   password: String!
+# }
 
 type Artist {
   id: ID!
   name: String!
-  mbID: String!
-  spotifyID: String
-  albums: [Album!]
-  songs: [Song!]
+  mbId: String!
+  spotifyId: String
+  albums: [Album]
+  #albums: [Album!]
+  #songs: [Song!]
 }
 
 type ArtistResult {
@@ -47,9 +48,9 @@ type AlbumSong {
   trackNum: Int!
 }
 
-type Song {
-  id: ID!
-  name: String!
-  artist: Artist!
-  album: Album!
-}
+# type Song {
+#   id: ID!
+#   name: String!
+#   artist: Artist!
+#   album: Album!
+# }

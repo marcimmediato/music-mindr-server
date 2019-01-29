@@ -11,10 +11,10 @@ export default class MusicBrainzAPI extends RESTDataSource {
     const artist = await this.get(
       `artist/${id}${this.formatJSON}&inc=url-rels`
     );
-    let spotifyID = null;
+    let spotifyId = null;
 
     if (artist.relations) {
-      spotifyID = artist.relations
+      spotifyId = artist.relations
         .filter(artist => artist.type === 'streaming music')
         .find(stream => stream.url.resource.includes('spotify'))
         .url.resource.split('/')
@@ -24,8 +24,8 @@ export default class MusicBrainzAPI extends RESTDataSource {
     return {
       id: artist.id,
       name: artist.name,
-      mbID: artist.id,
-      spotifyID
+      mbId: artist.id,
+      spotifyId
     };
   }
 
@@ -51,7 +51,7 @@ export default class MusicBrainzAPI extends RESTDataSource {
     const album = await this.get(
       `release/${id}${this.formatJSON}&inc=recordings+artists`
     );
-    const artist = album['artist-credit'][0].artist.id;
+    const artistId = album['artist-credit'][0].artist.id;
 
     // const songs = album.media[0].tracks.map(track => {
     //   return {
@@ -64,7 +64,7 @@ export default class MusicBrainzAPI extends RESTDataSource {
     return {
       id: album.id,
       name: album.title,
-      artist
+      artistId
     };
   }
 

@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { ApolloServer, gql } from 'apollo-server';
 import resolvers from './resolvers/index';
-import MusicBrainzAPI from './datasources/musicbrainz';
+import SpotifyAPI from './datasources/spotify';
 
 const typeDefs = gql`
   ${fs.readFileSync(__dirname.concat('/schema.graphql'), 'utf8')}
@@ -9,7 +9,7 @@ const typeDefs = gql`
 
 const dataSources = () => {
   return {
-    musicBrainzAPI: new MusicBrainzAPI()
+    spotifyAPI: new SpotifyAPI()
   };
 };
 

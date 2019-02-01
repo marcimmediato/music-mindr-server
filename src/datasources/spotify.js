@@ -1,4 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
+import getSpotifyClientToken from '../utils/getSpotifyClientToken';
 
 export default class SpotifyAPI extends RESTDataSource {
   constructor() {
@@ -6,8 +7,9 @@ export default class SpotifyAPI extends RESTDataSource {
     this.baseURL = 'https://api.spotify.com/v1/';
   }
 
-  willSendRequest(request) {
-    request.headers.set('User-Agent', 'MusicMindr/1.0 ( marc@immediato.io )');
+  async willSendRequest(request) {
+    const { access_token, token_type } = await getSpotifyClientToken();
+    request.headers.set('Authorization', `${token_type} ${access_token}`);
   }
 
   // Get one specific artist
@@ -34,23 +36,21 @@ export default class SpotifyAPI extends RESTDataSource {
   }
 
   // Search for artists
-  async searchArtists(searchTerm) {
+  async searchArtists(searchTerm, limit = 10) {
     const results = await this.get(
-      `artist/${this.formatJSON}&limit=5&query=artist:${searchTerm}`
+      `search?query=${searchTerm}&type=artist&limit=${limit}`
     );
+
+    console.log(results.artists);
 
     if (results.count === 0) {
       throw new Error('No results found.');
     }
 
-    return results.artists.map(({ id, name, disambiguation, score }) => {
-      return {
-        id,
-        name,
-        description: disambiguation,
-        score
-      };
-    });
+    return {
+      id: results.artists.items[0].id,
+      name: results.artists.items[0].name
+    };
   }
 
   async getAlbum(id) {

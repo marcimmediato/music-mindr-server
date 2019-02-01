@@ -3,7 +3,7 @@ import server from './server';
 import getSpotifyClientToken from './utils/getSpotifyClientToken';
 
 const res = getSpotifyClientToken().then(res => {
-  console.log(res.access_token);
+  console.log(res);
 });
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {

@@ -1,10 +1,10 @@
 import Query from './Query';
-import Album from './Album';
+import AlbumResult from './Album';
 import Artist from './Artist';
 
 const resolvers = {
   Query,
-  Album,
+  AlbumResult,
   Artist
 };
 

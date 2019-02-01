@@ -1,10 +1,9 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 
-export default class MusicBrainzAPI extends RESTDataSource {
+export default class SpotifyAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = 'http://mb.chrundle.com:5000/ws/2/';
-    this.formatJSON = '?fmt=json';
+    this.baseURL = 'https://api.spotify.com/v1/';
   }
 
   willSendRequest(request) {

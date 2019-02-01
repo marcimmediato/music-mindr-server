@@ -3,6 +3,7 @@ type Query {
   artists(query: String!): [ArtistResult!]!
   album(id: String!): Album!
   albums(query: String!): [AlbumResult!]!
+  albumGroups(id: String!): [AlbumGroup!]!
 }
 
 # type User {
@@ -15,31 +16,36 @@ type Query {
 type Artist {
   id: ID!
   name: String!
-  mbId: String!
   spotifyId: String
-  albums: [Album]
-  #albums: [Album!]
-  #songs: [Song!]
+  #albums: [Album]!
+  #songs: [Song!]!
 }
 
 type ArtistResult {
   id: ID!
   name: String!
   description: String
+  score: Int!
 }
 
 type Album {
   id: ID!
-  name: String!
+  title: String!
   artist: Artist!
-  #songs: [AlbumSong!]!
+  #songs: [Song!]!
 }
 
 type AlbumResult {
   id: ID!
-  name: String!
-  year: String
-  country: String
+  title: String!
+  score: Int!
+  artist: Artist!
+}
+
+type AlbumGroup {
+  id: ID!
+  title: String!
+  firstRelease: String!
 }
 
 type AlbumSong {

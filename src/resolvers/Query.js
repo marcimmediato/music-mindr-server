@@ -9,7 +9,7 @@ const Query = {
     return await dataSources.musicBrainzAPI.getAlbum(id);
   },
   albums: async (parent, { query }, { dataSources }, info) => {
-    return await dataSources.musicBrainzAPI.getAlbums(query);
+    return await dataSources.musicBrainzAPI.searchAlbums(query);
   }
 };
 

@@ -1,10 +1,10 @@
 type Query {
-  #  artist(id: String): Artist!
-  #artists(query: String!): [Artist!]!
-  artists(query: String!): Artist!
-  #  album(id: String!): Album!
-  #  albums(query: String!): [AlbumResult!]!
-  #  albumGroups(id: String!): [AlbumGroup!]!
+  artist(id: String): Artist!
+  artists(query: String!): [Artist!]!
+  album(id: String!): Album!
+  albums(query: String!): [Album!]!
+  track(id: String!): Track!
+  tracks(query: String!): [Track!]!
 }
 
 # type User {
@@ -17,46 +17,20 @@ type Query {
 type Artist {
   id: ID!
   name: String!
-  #albums: [Album]!
+  albums: [Album]!
   #songs: [Song!]!
 }
 
-# type ArtistResult {
-#   id: ID!
-#   name: String!
-#   description: String
-#   score: Int!
-# }
+type Album {
+  id: ID!
+  name: String!
+  artist: Artist!
+  #songs: [Song!]!
+}
 
-# type Album {
-#   id: ID!
-#   title: String!
-#   artist: Artist!
-#   #songs: [Song!]!
-# }
-
-# type AlbumResult {
-#   id: ID!
-#   title: String!
-#   score: Int!
-#   artist: Artist!
-# }
-
-# type AlbumGroup {
-#   id: ID!
-#   title: String!
-#   firstRelease: String!
-# }
-
-# type AlbumSong {
-#   id: ID!
-#   name: String!
-#   trackNum: Int!
-# }
-
-# type Song {
-#   id: ID!
-#   name: String!
-#   artist: Artist!
-#   album: Album!
-# }
+type Track {
+  id: ID!
+  name: String!
+  artist: Artist
+  album: Album
+}

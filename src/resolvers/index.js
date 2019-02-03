@@ -1,11 +1,13 @@
 import Query from './Query';
-//import AlbumResult from './Album';
+import Album from './Album';
 import Artist from './Artist';
+import Track from './Track';
 
 const resolvers = {
   Query,
-  //AlbumResult,
-  Artist
+  Album,
+  Artist,
+  Track
 };
 
 export { resolvers as default };

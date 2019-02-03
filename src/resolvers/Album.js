@@ -1,7 +1,7 @@
-const AlbumResult = {
+const Album = {
   async artist(parent, args, { dataSources }, info) {
-    return await dataSources.musicBrainzAPI.getArtist(parent.artistId);
+    return await dataSources.spotifyAPI.getArtist(parent.artistId);
   }
 };
 
-export { AlbumResult as default };
+export { Album as default };

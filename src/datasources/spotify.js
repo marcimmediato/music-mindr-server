@@ -99,4 +99,14 @@ export default class SpotifyAPI extends RESTDataSource {
       };
     });
   }
+
+  async getAlbumTracks(id) {
+    const albumTracks = await this.get(`albums/${id}/tracks`);
+    return albumTracks.items.map(({ id, name }) => {
+      return {
+        id,
+        name
+      };
+    });
+  }
 }

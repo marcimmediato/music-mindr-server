@@ -25,7 +25,7 @@ type Album {
   id: ID!
   name: String!
   artist: Artist!
-  #songs: [Song!]!
+  tracks: [Track!]!
 }
 
 type Track {

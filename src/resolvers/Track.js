@@ -3,6 +3,7 @@ const Track = {
     return await dataSources.spotifyAPI.getArtist(parent.artistId);
   },
   async album(parent, args, { dataSources }, info) {
+    console.log(parent);
     return await dataSources.spotifyAPI.getAlbum(parent.albumId);
   }
 };

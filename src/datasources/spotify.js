@@ -81,6 +81,27 @@ export default class SpotifyAPI extends RESTDataSource {
     });
   }
 
+  async getTrack(id) {
+    const track = await this.get(`tracks/${id}`);
+    console.log('ok', track);
+    return {
+      id: track.id,
+      name: track.name,
+      artistId: track.album.artists[0].id,
+      albumId: track.album.id
+    };
+  }
+
+  async getAlbumTracks(id) {
+    const albumTracks = await this.get(`albums/${id}/tracks`);
+    return albumTracks.items.map(({ id, name }) => {
+      return {
+        id,
+        name
+      };
+    });
+  }
+
   async searchTracks(searchTerm, limit = 20) {
     const results = await this.get(
       `search?query=${searchTerm}&type=track&limit=${limit}`
@@ -96,16 +117,6 @@ export default class SpotifyAPI extends RESTDataSource {
         name,
         albumId: album.id,
         artistId: artists[0].id
-      };
-    });
-  }
-
-  async getAlbumTracks(id) {
-    const albumTracks = await this.get(`albums/${id}/tracks`);
-    return albumTracks.items.map(({ id, name }) => {
-      return {
-        id,
-        name
       };
     });
   }

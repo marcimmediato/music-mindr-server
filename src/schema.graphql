@@ -31,6 +31,6 @@ type Album {
 type Track {
   id: ID!
   name: String!
-  artist: Artist
-  album: Album
+  artist: Artist!
+  album: Album!
 }

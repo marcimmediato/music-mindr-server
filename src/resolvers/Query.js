@@ -11,6 +11,9 @@ const Query = {
   albums: async (parent, { query }, { dataSources }, info) => {
     return await dataSources.spotifyAPI.searchAlbums(query);
   },
+  track: async (parent, { id }, { dataSources }, info) => {
+    return await dataSources.spotifyAPI.getTrack(id);
+  },
   tracks: async (parent, { query }, { dataSources }, info) => {
     return await dataSources.spotifyAPI.searchTracks(query);
   }

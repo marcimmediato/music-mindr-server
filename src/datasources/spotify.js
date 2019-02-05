@@ -26,8 +26,6 @@ export default class SpotifyAPI extends RESTDataSource {
       `search?query=${searchTerm}&type=artist&limit=${limit}`
     );
 
-    console.log(results.artists);
-
     if (results.count === 0) {
       throw new Error('No results found.');
     }
@@ -52,7 +50,7 @@ export default class SpotifyAPI extends RESTDataSource {
 
   async getArtistAlbums(id) {
     const artistAlbums = await this.get(`artists/${id}/albums`);
-    console.log(artistAlbums);
+
     return artistAlbums.items
       .filter(({ album_type }) => album_type === 'album')
       .map(({ id, name }) => {
@@ -83,7 +81,7 @@ export default class SpotifyAPI extends RESTDataSource {
 
   async getTrack(id) {
     const track = await this.get(`tracks/${id}`);
-    console.log('ok', track);
+
     return {
       id: track.id,
       name: track.name,

@@ -3,25 +3,17 @@ type User {
   username: String!
   email: String! @unique
   password: String!
+  mindrs: [Mindr!]! @relation(name: "MindrToUser", onDelete: CASCADE)
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
-type Artist {
+type Mindr {
   id: ID! @unique
+  user: User! @relation(name: "MindrToUser", onDelete: SET_NULL)
+  spotifyId: String!
+  type: String!
   name: String!
-  albums: [Album!]!
-  songs: [Song!]!
-}
-
-type Album {
-  id: ID! @unique
-  name: String!
-  artist: Artist!
-  songs: [Song!]!
-}
-
-type Song {
-  id: ID! @unique
-  name: String!
-  artist: Artist!
-  album: Album!
+  artist: String!
+  note: String
 }

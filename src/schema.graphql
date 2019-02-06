@@ -1,4 +1,7 @@
+# import User from './generated/prisma.graphql'
+
 type Query {
+  users: [User!]!
   artist(id: String): Artist!
   artists(query: String!): [Artist!]!
   album(id: String!): Album!
@@ -6,13 +9,6 @@ type Query {
   track(id: String!): Track!
   tracks(query: String!): [Track!]!
 }
-
-# type User {
-#   id: ID!
-#   username: String!
-#   email: String!
-#   password: String!
-# }
 
 type Artist {
   id: ID!
@@ -33,4 +29,24 @@ type Track {
   name: String!
   artist: Artist!
   album: Album!
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  password: String!
+  mindrs: [Mindr!]!
+  updatedAt: String!
+  createdAt: String!
+}
+
+type Mindr {
+  id: ID!
+  user: User!
+  spotifyId: String!
+  type: String!
+  name: String!
+  artist: String!
+  note: String
 }

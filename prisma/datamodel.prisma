@@ -1,6 +1,6 @@
 type User {
   id: ID! @unique
-  username: String!
+  name: String!
   email: String! @unique
   password: String!
   mindrs: [Mindr!]! @relation(name: "MindrToUser", onDelete: CASCADE)
@@ -16,4 +16,6 @@ type Mindr {
   name: String!
   artist: String!
   note: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }

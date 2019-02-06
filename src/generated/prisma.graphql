@@ -1,5 +1,5 @@
 # source: http://localhost:4466/
-# timestamp: Tue Feb 05 2019 19:18:21 GMT-0500 (Eastern Standard Time)
+# timestamp: Tue Feb 05 2019 20:09:59 GMT-0500 (Eastern Standard Time)
 
 type AggregateMindr {
   count: Int!
@@ -16,9 +16,6 @@ type BatchPayload {
 
 scalar DateTime
 
-"""Raw JSON value"""
-scalar Json
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -33,6 +30,8 @@ type Mindr implements Node {
   name: String!
   artist: String!
   note: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -102,6 +101,8 @@ type MindrPreviousValues {
   name: String!
   artist: String!
   note: String
+  updatedAt: DateTime!
+  createdAt: DateTime!
 }
 
 input MindrScalarWhereInput {
@@ -353,6 +354,50 @@ input MindrScalarWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
 }
 
 type MindrSubscriptionPayload {
@@ -704,6 +749,50 @@ input MindrWhereInput {
 
   """All values not ending with the given string."""
   note_not_ends_with: String
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
   user: UserWhereInput
 }
 
@@ -724,7 +813,6 @@ type Mutation {
   updateManyMindrs(data: MindrUpdateManyMutationInput!, where: MindrWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyMindrs(where: MindrWhereInput): BatchPayload!
-  executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
 enum MutationType {
@@ -754,10 +842,6 @@ type PageInfo {
   endCursor: String
 }
 
-enum PrismaDatabase {
-  default
-}
-
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   mindrs(where: MindrWhereInput, orderBy: MindrOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mindr]!
@@ -780,7 +864,7 @@ type Subscription {
 
 type User implements Node {
   id: ID!
-  username: String!
+  name: String!
   email: String!
   password: String!
   mindrs(where: MindrWhereInput, orderBy: MindrOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mindr!]
@@ -799,7 +883,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  username: String!
+  name: String!
   email: String!
   password: String!
   mindrs: MindrCreateManyWithoutUserInput
@@ -811,7 +895,7 @@ input UserCreateOneWithoutMindrsInput {
 }
 
 input UserCreateWithoutMindrsInput {
-  username: String!
+  name: String!
   email: String!
   password: String!
 }
@@ -828,8 +912,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  username_ASC
-  username_DESC
+  name_ASC
+  name_DESC
   email_ASC
   email_DESC
   password_ASC
@@ -842,7 +926,7 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  username: String!
+  name: String!
   email: String!
   password: String!
   updatedAt: DateTime!
@@ -889,14 +973,14 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  username: String
+  name: String
   email: String
   password: String
   mindrs: MindrUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
-  username: String
+  name: String
   email: String
   password: String
 }
@@ -909,7 +993,7 @@ input UserUpdateOneRequiredWithoutMindrsInput {
 }
 
 input UserUpdateWithoutMindrsDataInput {
-  username: String
+  name: String
   email: String
   password: String
 }
@@ -968,46 +1052,46 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  username: String
+  name: String
 
   """All values that are not equal to given value."""
-  username_not: String
+  name_not: String
 
   """All values that are contained in given list."""
-  username_in: [String!]
+  name_in: [String!]
 
   """All values that are not contained in given list."""
-  username_not_in: [String!]
+  name_not_in: [String!]
 
   """All values less than the given value."""
-  username_lt: String
+  name_lt: String
 
   """All values less than or equal the given value."""
-  username_lte: String
+  name_lte: String
 
   """All values greater than the given value."""
-  username_gt: String
+  name_gt: String
 
   """All values greater than or equal the given value."""
-  username_gte: String
+  name_gte: String
 
   """All values containing the given string."""
-  username_contains: String
+  name_contains: String
 
   """All values not containing the given string."""
-  username_not_contains: String
+  name_not_contains: String
 
   """All values starting with the given string."""
-  username_starts_with: String
+  name_starts_with: String
 
   """All values not starting with the given string."""
-  username_not_starts_with: String
+  name_not_starts_with: String
 
   """All values ending with the given string."""
-  username_ends_with: String
+  name_ends_with: String
 
   """All values not ending with the given string."""
-  username_not_ends_with: String
+  name_not_ends_with: String
   email: String
 
   """All values that are not equal to given value."""

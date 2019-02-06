@@ -1,4 +1,7 @@
 const Query = {
+  users: async (parent, args, { prisma }, info) => {
+    return await prisma.query.users(null, info);
+  },
   artist: async (parent, { id }, { dataSources }, info) => {
     return await dataSources.spotifyAPI.getArtist(id);
   },

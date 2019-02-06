@@ -1,3 +1,2 @@
-endpoint: http://localhost:4466/musicmindr/dev
+endpoint: http://localhost:4466
 datamodel: datamodel.prisma
-secret: ${env:PRISMA_SECRET}

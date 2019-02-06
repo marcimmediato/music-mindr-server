@@ -1,5 +1,9 @@
-# source: http://localhost:4466
-# timestamp: Tue Feb 05 2019 10:06:22 GMT-0500 (Eastern Standard Time)
+# source: http://localhost:4466/
+# timestamp: Tue Feb 05 2019 19:18:21 GMT-0500 (Eastern Standard Time)
+
+type AggregateMindr {
+  count: Int!
+}
 
 type AggregateUser {
   count: Int!
@@ -21,13 +25,705 @@ Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
 
+type Mindr implements Node {
+  id: ID!
+  user: User!
+  spotifyId: String!
+  type: String!
+  name: String!
+  artist: String!
+  note: String
+}
+
+"""A connection to a list of items."""
+type MindrConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MindrEdge]!
+  aggregate: AggregateMindr!
+}
+
+input MindrCreateInput {
+  spotifyId: String!
+  type: String!
+  name: String!
+  artist: String!
+  note: String
+  user: UserCreateOneWithoutMindrsInput!
+}
+
+input MindrCreateManyWithoutUserInput {
+  create: [MindrCreateWithoutUserInput!]
+  connect: [MindrWhereUniqueInput!]
+}
+
+input MindrCreateWithoutUserInput {
+  spotifyId: String!
+  type: String!
+  name: String!
+  artist: String!
+  note: String
+}
+
+"""An edge in a connection."""
+type MindrEdge {
+  """The item at the end of the edge."""
+  node: Mindr!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MindrOrderByInput {
+  id_ASC
+  id_DESC
+  spotifyId_ASC
+  spotifyId_DESC
+  type_ASC
+  type_DESC
+  name_ASC
+  name_DESC
+  artist_ASC
+  artist_DESC
+  note_ASC
+  note_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type MindrPreviousValues {
+  id: ID!
+  spotifyId: String!
+  type: String!
+  name: String!
+  artist: String!
+  note: String
+}
+
+input MindrScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MindrScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MindrScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MindrScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  spotifyId: String
+
+  """All values that are not equal to given value."""
+  spotifyId_not: String
+
+  """All values that are contained in given list."""
+  spotifyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [String!]
+
+  """All values less than the given value."""
+  spotifyId_lt: String
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: String
+
+  """All values greater than the given value."""
+  spotifyId_gt: String
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: String
+
+  """All values containing the given string."""
+  spotifyId_contains: String
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: String
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: String
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: String
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  artist: String
+
+  """All values that are not equal to given value."""
+  artist_not: String
+
+  """All values that are contained in given list."""
+  artist_in: [String!]
+
+  """All values that are not contained in given list."""
+  artist_not_in: [String!]
+
+  """All values less than the given value."""
+  artist_lt: String
+
+  """All values less than or equal the given value."""
+  artist_lte: String
+
+  """All values greater than the given value."""
+  artist_gt: String
+
+  """All values greater than or equal the given value."""
+  artist_gte: String
+
+  """All values containing the given string."""
+  artist_contains: String
+
+  """All values not containing the given string."""
+  artist_not_contains: String
+
+  """All values starting with the given string."""
+  artist_starts_with: String
+
+  """All values not starting with the given string."""
+  artist_not_starts_with: String
+
+  """All values ending with the given string."""
+  artist_ends_with: String
+
+  """All values not ending with the given string."""
+  artist_not_ends_with: String
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+}
+
+type MindrSubscriptionPayload {
+  mutation: MutationType!
+  node: Mindr
+  updatedFields: [String!]
+  previousValues: MindrPreviousValues
+}
+
+input MindrSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MindrSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MindrSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MindrSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MindrWhereInput
+}
+
+input MindrUpdateInput {
+  spotifyId: String
+  type: String
+  name: String
+  artist: String
+  note: String
+  user: UserUpdateOneRequiredWithoutMindrsInput
+}
+
+input MindrUpdateManyDataInput {
+  spotifyId: String
+  type: String
+  name: String
+  artist: String
+  note: String
+}
+
+input MindrUpdateManyMutationInput {
+  spotifyId: String
+  type: String
+  name: String
+  artist: String
+  note: String
+}
+
+input MindrUpdateManyWithoutUserInput {
+  create: [MindrCreateWithoutUserInput!]
+  connect: [MindrWhereUniqueInput!]
+  set: [MindrWhereUniqueInput!]
+  disconnect: [MindrWhereUniqueInput!]
+  delete: [MindrWhereUniqueInput!]
+  update: [MindrUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [MindrUpdateManyWithWhereNestedInput!]
+  deleteMany: [MindrScalarWhereInput!]
+  upsert: [MindrUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input MindrUpdateManyWithWhereNestedInput {
+  where: MindrScalarWhereInput!
+  data: MindrUpdateManyDataInput!
+}
+
+input MindrUpdateWithoutUserDataInput {
+  spotifyId: String
+  type: String
+  name: String
+  artist: String
+  note: String
+}
+
+input MindrUpdateWithWhereUniqueWithoutUserInput {
+  where: MindrWhereUniqueInput!
+  data: MindrUpdateWithoutUserDataInput!
+}
+
+input MindrUpsertWithWhereUniqueWithoutUserInput {
+  where: MindrWhereUniqueInput!
+  update: MindrUpdateWithoutUserDataInput!
+  create: MindrCreateWithoutUserInput!
+}
+
+input MindrWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MindrWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MindrWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MindrWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  spotifyId: String
+
+  """All values that are not equal to given value."""
+  spotifyId_not: String
+
+  """All values that are contained in given list."""
+  spotifyId_in: [String!]
+
+  """All values that are not contained in given list."""
+  spotifyId_not_in: [String!]
+
+  """All values less than the given value."""
+  spotifyId_lt: String
+
+  """All values less than or equal the given value."""
+  spotifyId_lte: String
+
+  """All values greater than the given value."""
+  spotifyId_gt: String
+
+  """All values greater than or equal the given value."""
+  spotifyId_gte: String
+
+  """All values containing the given string."""
+  spotifyId_contains: String
+
+  """All values not containing the given string."""
+  spotifyId_not_contains: String
+
+  """All values starting with the given string."""
+  spotifyId_starts_with: String
+
+  """All values not starting with the given string."""
+  spotifyId_not_starts_with: String
+
+  """All values ending with the given string."""
+  spotifyId_ends_with: String
+
+  """All values not ending with the given string."""
+  spotifyId_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  artist: String
+
+  """All values that are not equal to given value."""
+  artist_not: String
+
+  """All values that are contained in given list."""
+  artist_in: [String!]
+
+  """All values that are not contained in given list."""
+  artist_not_in: [String!]
+
+  """All values less than the given value."""
+  artist_lt: String
+
+  """All values less than or equal the given value."""
+  artist_lte: String
+
+  """All values greater than the given value."""
+  artist_gt: String
+
+  """All values greater than or equal the given value."""
+  artist_gte: String
+
+  """All values containing the given string."""
+  artist_contains: String
+
+  """All values not containing the given string."""
+  artist_not_contains: String
+
+  """All values starting with the given string."""
+  artist_starts_with: String
+
+  """All values not starting with the given string."""
+  artist_not_starts_with: String
+
+  """All values ending with the given string."""
+  artist_ends_with: String
+
+  """All values not ending with the given string."""
+  artist_not_ends_with: String
+  note: String
+
+  """All values that are not equal to given value."""
+  note_not: String
+
+  """All values that are contained in given list."""
+  note_in: [String!]
+
+  """All values that are not contained in given list."""
+  note_not_in: [String!]
+
+  """All values less than the given value."""
+  note_lt: String
+
+  """All values less than or equal the given value."""
+  note_lte: String
+
+  """All values greater than the given value."""
+  note_gt: String
+
+  """All values greater than or equal the given value."""
+  note_gte: String
+
+  """All values containing the given string."""
+  note_contains: String
+
+  """All values not containing the given string."""
+  note_not_contains: String
+
+  """All values starting with the given string."""
+  note_starts_with: String
+
+  """All values not starting with the given string."""
+  note_not_starts_with: String
+
+  """All values ending with the given string."""
+  note_ends_with: String
+
+  """All values not ending with the given string."""
+  note_not_ends_with: String
+  user: UserWhereInput
+}
+
+input MindrWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createUser(data: UserCreateInput!): User!
+  createMindr(data: MindrCreateInput!): Mindr!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateMindr(data: MindrUpdateInput!, where: MindrWhereUniqueInput!): Mindr
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteMindr(where: MindrWhereUniqueInput!): Mindr
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertMindr(where: MindrWhereUniqueInput!, create: MindrCreateInput!, update: MindrUpdateInput!): Mindr!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateManyMindrs(data: MindrUpdateManyMutationInput!, where: MindrWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyMindrs(where: MindrWhereInput): BatchPayload!
   executeRaw(database: PrismaDatabase, query: String!): Json!
 }
 
@@ -64,8 +760,11 @@ enum PrismaDatabase {
 
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  mindrs(where: MindrWhereInput, orderBy: MindrOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mindr]!
   user(where: UserWhereUniqueInput!): User
+  mindr(where: MindrWhereUniqueInput!): Mindr
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  mindrsConnection(where: MindrWhereInput, orderBy: MindrOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MindrConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -76,6 +775,7 @@ type Query {
 
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  mindr(where: MindrSubscriptionWhereInput): MindrSubscriptionPayload
 }
 
 type User implements Node {
@@ -83,6 +783,7 @@ type User implements Node {
   username: String!
   email: String!
   password: String!
+  mindrs(where: MindrWhereInput, orderBy: MindrOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Mindr!]
   updatedAt: DateTime!
   createdAt: DateTime!
 }
@@ -98,6 +799,18 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  username: String!
+  email: String!
+  password: String!
+  mindrs: MindrCreateManyWithoutUserInput
+}
+
+input UserCreateOneWithoutMindrsInput {
+  create: UserCreateWithoutMindrsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutMindrsInput {
   username: String!
   email: String!
   password: String!
@@ -179,12 +892,31 @@ input UserUpdateInput {
   username: String
   email: String
   password: String
+  mindrs: MindrUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
   username: String
   email: String
   password: String
+}
+
+input UserUpdateOneRequiredWithoutMindrsInput {
+  create: UserCreateWithoutMindrsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutMindrsDataInput
+  upsert: UserUpsertWithoutMindrsInput
+}
+
+input UserUpdateWithoutMindrsDataInput {
+  username: String
+  email: String
+  password: String
+}
+
+input UserUpsertWithoutMindrsInput {
+  update: UserUpdateWithoutMindrsDataInput!
+  create: UserCreateWithoutMindrsInput!
 }
 
 input UserWhereInput {
@@ -400,6 +1132,9 @@ input UserWhereInput {
 
   """All values greater than or equal the given value."""
   createdAt_gte: DateTime
+  mindrs_every: MindrWhereInput
+  mindrs_some: MindrWhereInput
+  mindrs_none: MindrWhereInput
 }
 
 input UserWhereUniqueInput {

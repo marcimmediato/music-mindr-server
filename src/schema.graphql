@@ -9,7 +9,8 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: CreateUserInput): User!
+  createUser(data: CreateUserInput): AuthPayload!
+  login(data: LoginUserInput!): AuthPayload!
 }
 
 type Artist {
@@ -60,6 +61,11 @@ type AuthPayload {
 
 input CreateUserInput {
   name: String!
+  email: String!
+  password: String!
+}
+
+input LoginUserInput {
   email: String!
   password: String!
 }

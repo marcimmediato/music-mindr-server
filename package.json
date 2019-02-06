@@ -16,6 +16,7 @@
     "env-cmd": "^8.0.2",
     "graphql": "^14.1.1",
     "graphql-cli": "^3.0.9",
+    "jsonwebtoken": "^8.4.0",
     "prisma-binding": "^2.3.2"
   },
   "devDependencies": {

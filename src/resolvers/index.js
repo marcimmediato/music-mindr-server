@@ -1,12 +1,14 @@
-import Query from './Query';
 import Album from './Album';
 import Artist from './Artist';
+import Mutation from './Mutation';
+import Query from './Query';
 import Track from './Track';
 
 const resolvers = {
-  Query,
   Album,
   Artist,
+  Mutation,
+  Query,
   Track
 };
 

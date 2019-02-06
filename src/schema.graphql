@@ -1,13 +1,15 @@
-# import User from './generated/prisma.graphql'
-
 type Query {
-  users: [User!]!
+  users(query: String): [User!]!
   artist(id: String): Artist!
   artists(query: String!): [Artist!]!
   album(id: String!): Album!
   albums(query: String!): [Album!]!
   track(id: String!): Track!
   tracks(query: String!): [Track!]!
+}
+
+type Mutation {
+  createUser(data: CreateUserInput): User!
 }
 
 type Artist {
@@ -49,4 +51,15 @@ type Mindr {
   name: String!
   artist: String!
   note: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
 }

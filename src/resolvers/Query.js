@@ -1,6 +1,20 @@
 const Query = {
   users: async (parent, args, { prisma }, info) => {
-    return await prisma.query.users(null, info);
+    const opArgs = {};
+
+    if (args.query) {
+      opArgs.where = {
+        OR: [
+          {
+            name_contains: args.query
+          },
+          {
+            email_contains: args.query
+          }
+        ]
+      };
+    }
+    return await prisma.query.users(opArgs, info);
   },
   artist: async (parent, { id }, { dataSources }, info) => {
     return await dataSources.spotifyAPI.getArtist(id);

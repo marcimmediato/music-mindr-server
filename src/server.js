@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { ApolloServer, gql } from 'apollo-server';
 import prisma from './prisma';
-import resolvers from './resolvers/index';
+import { resolvers, fragmentReplacements } from './resolvers/index';
 import SpotifyAPI from './datasources/spotify';
 
 const typeDefs = gql`
@@ -23,7 +23,8 @@ const server = new ApolloServer({
       prisma,
       request
     };
-  }
+  },
+  fragmentReplacements
 });
 
 export { server as default };

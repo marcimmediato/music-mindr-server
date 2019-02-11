@@ -1,3 +1,5 @@
+import { extractFragmentReplacements } from 'prisma-binding';
+
 import Album from './Album';
 import Artist from './Artist';
 import Mutation from './Mutation';
@@ -14,4 +16,6 @@ const resolvers = {
   User
 };
 
-export { resolvers as default };
+const fragmentReplacements = extractFragmentReplacements(resolvers);
+
+export { resolvers, fragmentReplacements };

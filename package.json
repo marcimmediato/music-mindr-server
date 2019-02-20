@@ -12,6 +12,7 @@
     "heroku-postbuild": "babel src --out-dir dist --copy-files"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "apollo-datasource-rest": "^0.2.2",
     "apollo-server": "^2.3.3",
     "bcryptjs": "^2.4.3",

@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "env-cmd ./config/dev.env nodemon --exec babel-node src/index.js --ext js,graphql",
-    "get-schema": "graphql get-schema -p prisma"
+    "get-schema": "graphql get-schema -p prisma",
+    "start": "node dist/index.js",
+    "heroku-postbuild": "babel src --out-dir dist --copy-files"
   },
   "dependencies": {
     "apollo-datasource-rest": "^0.2.2",
